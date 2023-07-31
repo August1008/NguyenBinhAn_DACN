@@ -1,0 +1,152 @@
+﻿@using NguyenBinhAn_DACN.Utility
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Roll Call System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" />
+    <script src="https://kit.fontawesome.com/c33ada6222.js" crossorigin="anonymous"></script>
+    <script type ="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+</head>
+<body>
+
+    <div class="">
+    <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo_rollcallsystem.png" alt="logo" style="width:50px;height:50px;"/>
+                Roll Call System</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+</header>
+   @if(User.Identity.IsAuthenticated)
+    {
+        <div class="btn btn-leftside click">
+            <span class="fa-solid fa-bars"></span>
+        </div>
+        <div class="row row-main right-move main-mh">
+        
+                @if (User.IsInRole(SD.Role_Admin))
+                {
+                    <nav class="sidebar show main-mh">
+                        <div class="text">
+                           Admin
+                        </div>
+                        <ul class="main_side">
+                           <li class="active"><a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fa-solid fa-sitemap"></i>admin:  @User.Identity.Name</a></li>
+                           <li>
+                              <a class="nav-link" href="#" id="1">Manage
+                              <span class="fas fa-caret-down"></span>
+                              </a>
+                              <ul class="item-show-1 show">
+                                 <li><a class="nav-link" asp-area="Admin" asp-controller="Classes" asp-action="Index"><i class="fa-solid fa-chalkboard-user"></i>Manage Class</a></li>
+                                 <li><a class="nav-link" asp-area="Admin" asp-controller="Teachers" asp-action="Index"><i class="fa-solid fa-user-tie"></i> Manage Teacher</a></li>
+                                 <li><a class="nav-link" asp-area="Admin" asp-controller="Student" asp-action="Index"><i class="fa-solid fa-user-graduate"></i>Manage Student</a></li>
+                                 <li><a class="nav-link" asp-area="Admin" asp-controller="Subjects" asp-action="Index"><i class="fa-solid fa-book-journal-whills"></i>Manage Subject</a></li>
+                                 <li><a class="nav-link" asp-area="Admin" asp-controller="Departments" asp-action="Index"><i class="fa-solid fa-house-laptop"></i>Dapartments</a></li>
+                                <li><a class="nav-link" asp-area="Admin" asp-controller="Courses" asp-action="Index"><i class="fa-solid fa-pen-nib"></i>Manage Course</a></li>
+                             </ul>
+                           </li>
+                           <li><a class="nav-link" href="#">Import File Excel</a></li>
+                        </ul>
+                    </nav>
+                    <div class="col-xl-12 bg" >
+                            <main role="main" class="main-pd" style="background-color:lavenderblush;">
+                                <div id="message_box"></div>
+                                @RenderBody()
+                            </main>
+
+                        </div>
+                }
+                else
+                    {
+                        <nav class="sidebar show main-mh">
+                            <div class="text">
+                               Teacher
+                            </div>
+                            <ul class="main_side">
+                               <li class=""><a class="nav-link" href="#">Home: @User.Identity.Name</a></li>
+                               <li>
+                                  <a class="nav-link" asp-area="Teachera" asp-controller="MyClass" asp-action="Index" asp-route-id="@User.Identity.Name">My Classes </a>
+                               </li>
+                               <li><a href="#">Import Excel Files</a></li>
+                            </ul>
+                         </nav>
+                         <div class="col-xl-12 bg" >
+                            <div class="row">
+                            <div class="col-md-12">
+                                <div class="card" style="margin:50px;margin-bottom:100px;">
+                                    <div class="card-header bg-secondary">Instructor</div>
+                                    <div class="card-body">Hello @User.Identity.Name, this is your page to see attendance of your all class</div>
+                                </div>
+        
+                             </div>
+                            </div>
+                            <main role="main" class="main-pd" style="background-color:lavenderblush;">
+                                <div id="message_box"></div>
+                                @RenderBody()
+                            </main>
+
+                        </div>
+                    }
+            </div>
+  }
+  else
+   {
+       <div class="container-fluid main-mh bg">
+       <div class="row">
+           <div class="col-md-2"></div>
+           <div class="col-md-8" >
+              <main role="main" class="main-pd">
+                @RenderBody()
+            </main>
+            </div>
+            <div class="col-md-4"></div>
+       </div>  
+       </div>
+   }
+   <footer class="bg-light text-center text-lg-start">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0" >
+        <h5 class="text-uppercase nav-link">Roll Call System</h5>
+        <p class="nav-link">
+          This system is developed by Nguyen Binh An
+        </p>
+      </div>
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+         <h4><a class="navbar-brand" href="https://www.hutech.edu.vn/" style="color:black;top: 50%;position: absolute;-ms-transform: translateY(-50%);transform: translateY(-50%);">Hutech University</a></h4> 
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <p>Privacy Policy</p>
+  </div>
+  <!-- Copyright -->
+</footer>
+  
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    </div>
+</body>
+</html>

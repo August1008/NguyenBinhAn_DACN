@@ -1,0 +1,585 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Garamond, sans-serif;
+}
+
+body {
+    background-color: #eee;
+}
+.card {
+    text-align:center;
+    font-weight:bold;
+    transition: transform .3s;
+}
+a.card:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+    color:darkgray;
+}
+
+a.card {
+    text-decoration: none;
+    color:black;
+}
+a.navbar-brand {
+    font-size: 25px;
+    font-weight: 500;
+    font-family:Garamond;
+}
+a.nav-link{
+    font-size: 20px;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+    transition: margin-left .5s;
+}
+
+.container-fluid {
+    padding: 0px;
+}
+
+.table {
+    width: 100%;
+}
+
+.row-main {
+    margin: 10px;
+    transition: margin-left 0.4s;
+}
+
+    .row-main.right-move {
+        margin-left: 210px;
+    }
+
+#tblTable {
+    width: 100%;
+}
+/*.btn {
+    position: absolute;
+    top: 10px;
+    left: 45px;
+    height: 37px;
+    width: 37px;
+    text-align: center;
+    background: #1b1b1b;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: left 0.4s ease;
+}*/
+
+/*.btn.click {
+        left: 260px;
+    }
+
+    .btn span {
+        color: white;
+        font-size: 15px;
+        line-height: 36px;
+    }
+
+    .btn.click span:before {
+        content: '\f00d';
+    }*/
+.btn.btn-leftside {
+    /* position: absolute;*/
+    left: 15px;
+    top: 15px;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    background: #5b5b5b;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: margin-left 0.4s ease;
+    padding: 0px;
+    margin-left: 15px;
+}
+
+    .btn.btn-leftside.click {
+        margin-left: 210px;
+    }
+
+    .btn.btn-leftside span {
+        color: white;
+        font-size: 15px;
+        line-height: 36px;
+    }
+
+    .btn.btn-leftside.click span:before {
+        content: '\f00d';
+    }
+
+.sidebar {
+    position: absolute;
+    width: 200px;
+    left: -200px;
+    background: #1b1b1b;
+    transition: left 0.4s ease;
+}
+
+    .sidebar.show {
+        left: 0px;
+    }
+
+    .sidebar .text {
+        color: white;
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 65px;
+        text-align: center;
+        background: #1e1e1e;
+        letter-spacing: 1px;
+    }
+
+nav.sidebar ul {
+    background: #1b1b1b;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    padding-left: 10px;
+}
+
+    nav.sidebar ul li {
+        line-height: 50px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+        nav.sidebar ul li:last-child {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav.sidebar ul li a {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding-left: 14px;
+            font-weight: 500;
+            display: block;
+            width: 100%;
+            border-left: 3px solid transparent;
+        }
+
+        nav.sidebar ul li.active a {
+            color: #FC5404;
+            background: #1e1e1e;
+            border-left-color: #FC5404;
+        }
+
+        nav.sidebar ul li a:hover {
+            background: #1e1e1e;
+        }
+
+.feat-show {
+    transition: all 0.5s;
+}
+
+nav.sidebar ul li.active ul {
+    transition: all 0.5s;
+}
+
+nav.sidebar ul ul {
+    position: static;
+    display: none;
+}
+
+nav.sidebar ul.show {
+    display: block;
+    transition: all 0.5s;
+}
+
+nav.sidebar ul ul li {
+    line-height: 42px;
+    border-top: none;
+}
+
+    nav.sidebar ul ul li a {
+        font-size: 15px;
+        color: #e6e6e6;
+    }
+
+nav.sidebar ul li.active ul li a {
+    color: #e6e6e6;
+    background: #1b1b1b;
+    border-left-color: transparent;
+}
+
+a:hover {
+    color: #FC5404;
+}
+
+nav ul ul li a:hover {
+    color: #FC5404 !important;
+    background: #1e1e1e !important;
+}
+
+nav ul li a span {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 15px;
+    transition: transform 0.4s;
+}
+
+    nav ul li a span.rotate {
+        transform: translateY(-50%) rotate(-180deg);
+    }
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #202020;
+    z-index: -1;
+    text-align: center;
+}
+
+thead th {
+    border: 2px solid white;
+}
+
+.dropdown-menu-dark {
+    background-color: #CFC9C8;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+.xd-message {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+    min-height: 60px;
+    background: #FFF;
+    border: 1px solid #455870;
+    margin-bottom: 2rem;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+}
+
+.xd-message-icon {
+    background: #455870;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-size: 1.6rem;
+    margin: 0;
+    margin-left: -1px;
+}
+
+.xd-message-content {
+    flex: 6;
+    padding-left: 1.5rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.xd-message-close {
+    color: #455870;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: color .4s ease;
+}
+
+.close-icon:hover {
+    transition: color .4s ease;
+    color: darkorchid;
+}
+
+.hide {
+    transition: all .5s;
+    opacity: 0;
+    visibility: hidden;
+    animation: hideMsgAlert 1s;
+}
+
+.msg-success {
+    border: 1px solid #47ae74;
+}
+
+.xd-message-icon {
+    background: #47ae74;
+}
+
+.xd-message-content,
+.xd-message-close {
+    color: #47ae74;
+}
+
+.xd-message-close {
+}
+
+.close-icon:hover {
+    color: antiquewhite;
+}
+
+@keyframes hideMsgAlert {
+    0% {
+        opacity: 1;
+        transform: translateX(-20%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+.card-body {
+    position: relative;
+    width: 100%;
+    padding: 1px;
+}
+
+    .card-body img {
+        max-height: 150px;
+    }
+
+    .card-body .btnDelete {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: Transparent;
+        color: white;
+        font-size: 30px;
+        padding: 12px 24px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+        .card-body .btnDelete:hover {
+            background-color: red;
+        }
+
+body, html {
+    height: 100%;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("background.jpg");
+    /* Full height */
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 1rem;
+}
+.bg-card {
+    background-image: url("background_card.jpg");
+    /* Full height */
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 1rem;
+}
+
+.main-pd {
+    padding: 1rem;
+}
+
+.main-mh {
+    min-height: 950px;
+}
+.readonly {
+    background: darkgray;
+}
+
+.btn.btn-link.text-light:hover {
+    background-color:darkgray;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center
+}
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+
+        }
+dt{
+    text-align:right;
+}
+dd{
+    text-align:left;
+}
+
+.form-group i {
+    position: absolute;
+    padding: 10px;
+    min-width: 20px;
+}
+.form-group input {
+    width: 100%;
+    padding: 5px;
+    padding-left:40px;
+}
+    .form-group input:focus {
+        border: 3px solid #00584E;
+    }
+
+    input.login {
+        border-radius: 25px;
+    }
+
+button.login {
+    border-radius: 25px;
+    width: 100%;
+    padding: 5px;
+    background: #47ae74;
+}
+
+
+.nav-link i{
+    padding:10px;
+}
+
+.card-body .btnDelete {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: Transparent;
+    color: white;
+    font-size: 30px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+    .card-body .btnDelete:hover {
+        background-color: red;
+    }
+.card-body img {
+    max-height: 150px;
+}
+
+#message_box {
+    position: fixed;
+    width: 400px;
+    height: fit-content;
+    background: #fff;
+    border: 0px solid #f0f0f0;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    top: 30px;
+    right: 0px;
+    margin-left: -150px;
+    text-align: center;
+    z-index: 1000;
+    display: none;
+}
+
+    #message_box.show {
+        display: block;
+    }
+
+    #message_box input[type=button] {
+        float: right;
+        margin-right: 10px;
+    }

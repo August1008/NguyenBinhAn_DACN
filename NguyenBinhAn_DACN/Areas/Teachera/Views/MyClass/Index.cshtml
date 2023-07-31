@@ -1,0 +1,67 @@
+﻿@using NguyenBinhAn_DACN.Areas.Teachera.Models
+@model IEnumerable<MyClassModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Pager pager = new Pager();
+    int pageNo = 0;
+
+    if(ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+
+@{
+    if (pager.TotalPages > 0)
+    {
+        <div class="row row-cols-2" style="margin-bottom:15px;">
+        @foreach (var m in Model)
+        {
+            
+                <div class="col-4" style="margin-bottom:20px;">
+                    <a asp-action="Detail" asp-route-id="@m.CourseOrder" class="card">
+                        <div class="card-header bg-secondary">
+                        <i class="fa-solid fa-book"></i>
+                            @m.ClassName - @m.SubjectId
+                        </div>
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                            <label class="control-label">From</label>
+                                <h5 class="card-title">@m.StartDate</h5>
+                            </div>
+                            <div class="col-md-6">
+                            <label class="control-label">To</label>
+                                <h5 class="card-title">@m.EndDate</h5>
+                                </div>
+                        </div>
+                            @if ((DateTime.Now.TimeOfDay >= new TimeSpan(@m.Hour, 30, 0)) && (DateTime.Now.TimeOfDay <= new TimeSpan(@m.Hour + 4, 30, 0)))
+                            {
+                                <div class="card-footer bg-success">
+                                    <i class="fa-solid fa-user-clock"></i> @m.Shift
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="card-footer bg-danger">
+                                    <i class="fa-solid fa-user-clock"></i> @m.Shift
+                                </div>
+                            }
+                        </div>
+                    </a>
+                </div>
+            
+        }
+        </div>
+        <div class="pagination">
+            @for(var p = pager.StartPage; p <= pager.EndPage; p++)
+            {
+                
+                <a class="@(p == pager.CurrentPage ? "active" : " ")" asp-controller="MyClass" asp-action="Index" asp-route-pg="@p">@p</a>
+            }
+        </div>
+    }
+}

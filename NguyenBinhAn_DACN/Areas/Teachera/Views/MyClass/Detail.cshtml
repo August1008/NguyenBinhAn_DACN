@@ -1,0 +1,169 @@
+﻿@using NguyenBinhAn_DACN.Areas.Teachera.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<StudentAttendanceModel>
+@{
+     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row" style="margin-bottom:50px;">
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header bg-secondary">
+                <i class="fa-solid fa-book-open"></i>
+                Information
+            </div>
+            <div class="card-body bg-card">
+                <dl class="row">
+                <dt class = "col-sm-6">
+                    Subject :
+                </dt>
+                <dd class = "col-sm-6">
+                    @ViewBag.Subject
+                </dd>
+                </dl>
+                <dl class="row">
+                <dt class = "col-sm-6">
+                    Instructor :
+                </dt>
+                <dd class = "col-sm-6">
+                    @ViewBag.Level. @ViewBag.Teacher
+                </dd>
+                </dl>
+                <dl class="row">
+                <dt class = "col-sm-6">
+                     Class :
+                </dt>
+                <dd class = "col-sm-6">
+                    @ViewBag.Class
+                </dd>
+                </dl>
+                <dl class="row">
+                <dt class = "col-sm-6">
+                    From   @ViewBag.StartDate
+                </dt>
+                <dd class = "col-sm-6">
+                    To   @ViewBag.EndDate
+                </dd>
+                </dl>
+                <dl class="row">
+                <dt class = "col-sm-6">
+                    Studying Time :
+                </dt>
+                <dd class = "col-sm-6">
+                    @ViewBag.Time
+                </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">
+                <span>Attendances Chart</span>
+            </div>
+                <div class="card-body">
+                    <canvas id="bar"></canvas>
+                </div>
+            </div>
+        
+    </div>
+</div>
+<div class="row" style="margin-bottom:30px;">
+    <div class="col-md-6">
+        <button class="btn btn-secondary" onclick="ExportExcel(@ViewBag.CourseOrder)" style="float:right;">Export Excel</button>
+    </div>
+    <div class="col-md-6">
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+    <div class="card-header bg-dark">
+        <span class="text-light">Attendances Log</span>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Date</th>
+                <th>Present/Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int index = 0;
+                foreach(var lesson in ViewBag.LessonList as List<LessonModel>)
+                {
+                    index = index + 1;
+                    <tr>
+                        <th>@index</th>
+                        <th>@lesson.LessonDate</th>
+                        <th>@lesson.AttendanceStudent / @ViewBag.StudentCount</th>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    </div>
+    
+</div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-dark">
+                <span class="text-light">Student List</span>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped" style="background:#e8e5e1;">
+            <thead>
+                <tr>
+                <th>Student Code</th>
+                <th>Student Name</th>
+                <th>Attendance Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach(var student in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => student.StudentId)</td>
+                        <td>@Html.DisplayFor(model => student.StudentName)</td>
+                        <td>@Html.DisplayFor(model => student.AttendanceRate) %</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const arr = ['Lesson 1', 'Lesson 2', 'Lesson 3'];
+    var chart = document.getElementById('bar').getContext('2d');
+    var myChart = new Chart(chart, {
+        type: 'bar',
+        data: {
+            labels: arr,
+            datasets: [{
+                label: 'Roll call chart',
+                data: [1,0,0,2],
+                backgroundColor: 'rgba(52,87,78)'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>

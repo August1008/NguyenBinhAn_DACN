@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model NguyenBinhAn_DACN.Areas.Admin.Models.CourseModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+            <form asp-action="Create">
+
+           
+            <div class="form-group">
+                 <label class="control-label">Department</label>
+                <select id="ddlDepartment" class="form-control" asp-items="@(new SelectList(ViewBag.DepartmentList,"Value","Text"))">
+                    <option value="" disabled selected hidden>Choose Department...</option>
+                </select>
+            </div>
+                
+            
+            <div class="form-group">
+                <label class="control-label">Class</label>
+                <select asp-for="ClassId" id="ddlClass" class="form-control" asp-items="@(new SelectList(string.Empty,"classId","name"))">
+                    <option value="" disabled selected hidden></option>
+                </select>
+            </div>
+
+            
+            <div class="form-group">
+                <label class="control-label">Subject</label>
+                <select asp-for="SubjectId" class="form-control" asp-items="@(new SelectList(ViewBag.SubjectList,"Value","Text"))">
+                    <option value="" disabled selected hidden>Choose Subject...</option>
+                </select>
+            </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label">From</label>
+            <div class="form-group">
+                <input asp-for="StartDate" type="date" class="form-control" />
+            </div>
+        </div>
+                
+        <div class="col-md-6">
+            <label class="control-label">To</label>
+            <div class="form-group">
+                <input asp-for="EndDate" type="date" class="form-control" />
+            </div>
+        </div>
+        </div>
+        <div class="row">
+                <div class="col-md-6">
+                <label class="control-label">Instructor</label>
+                <div class="form-group">
+                    <select  asp-for="TeacherId" class="form-control" asp-items="@(new SelectList(ViewBag.TeacherList,"Value","Text"))">
+                        <option value="" disabled selected hidden>- Choose Instructor -</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label">Time to Study</label>
+                <div class="form-group">
+                    <select  asp-for="TimeId" class="form-control" asp-items="@(new SelectList(ViewBag.TimeList,"Value","Text"))">
+                        <option value="" disabled selected hidden>- Choose Time -</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+    
+            <a asp-action="Index" class="btn btn-danger">Cancel</a>
+           <input type="submit" value="Create" class="btn btn-primary" style="float:right;" />
+      
+    </form>
+    </div>
+</div>
+
